@@ -1,0 +1,7 @@
+version=0.0.1
+reddit.username=otero9
+reddit.password=opendirectoryindexer
+reddit.redditClientId=CshUY5ycSVfyUw
+reddit.redditClientSecret=aduUtZ1JiGQhV7h6MQkF36mjlKg
+outputFilename=urls.txt
+timeout=30
