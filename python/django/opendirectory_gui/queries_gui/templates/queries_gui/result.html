@@ -1,0 +1,147 @@
+<style>
+    body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4f5b7a;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table caption {
+    font-size: 1.3em;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  table td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+.no_results{
+    border: 1px solid #CED5D7;
+    border-radius: 6px;
+    padding: 20px 20px 20px;
+    margin-top: 50px;
+    background-color: #F7BBBB;
+    text-align: center;
+    box-shadow: 0px 5px 10px red, 0 0 0 10px #F7BBBB inset;"
+}
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+}
+
+.filename:hover, .last_modified:hover, .content_length:hover,
+.content_type:hover, .available:hover, .location:hover,
+.ip:hover, .source:hover{
+    width: auto;
+    overflow: visible;
+    white-space: normal;
+    height:auto;
+}
+</style>
+
+<table style="width:100%">
+    {% if not results %}
+    <p class="no_results"><b>NO RESULTS FOUND</b></p>
+    {% endif %}
+
+    {%if results %}
+    <tr>
+        <th>File name</th>
+        <th>Last modified</th>
+        <th>Size (MiB)</th>
+        <th>Content type</th>
+        <th>Host availability</th>
+        <th>Host geolocation</th>
+        <th>Host IP</th>
+        <th>Server source</th>
+        <th>Direct link</th>
+    </tr>
+
+
+    {% for result in results %}
+    <tr>
+        <td class="truncate filename">{{ result.filename }}</td>
+        <td class="truncate last_modified">{{ result.lastmodified }}</td>
+        <td class="truncate content_length">{{ result.content_lengtd }}</td>
+        <td class="truncate content_type">{{ result.content_type }}</td>
+        <td class="truncate available">{{ result.available }}</td>
+        <td class="truncate location">{{ result.location }}</td>
+        <td class="truncate ip">{{ result.ip }}</td>
+        <td class="truncate source">{{ result.source }}</td>
+        <td class="truncate">
+            <a href="{{ result.id }}">{{ result.id }}</a>
+        </td>
+    </tr>
+    {% endfor %} {% endif %}
+
+</table>
